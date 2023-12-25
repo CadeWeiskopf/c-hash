@@ -1,5 +1,6 @@
 #include "LinkedList.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 LinkedList* LinkedListAllocate() {
     LinkedList* list = (LinkedList*) malloc(sizeof(LinkedList));
@@ -12,16 +13,10 @@ LinkedList* LinkedListInsert(LinkedList* list, HashItem* item) {
         head->item = item;
         head->next = NULL;
         return head;
-    } else if (list->next == NULL) {
-        LinkedList* node = LinkedListAllocate();
-        node->item = item;
-        node->next = NULL;
-        list->next = node;
-        return list;
     }
 
     LinkedList* temp = list;
-    while (temp->next->next) {
+    while (temp->next) {
         temp = temp->next;
     }
     LinkedList* node = LinkedListAllocate();
