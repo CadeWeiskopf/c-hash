@@ -89,9 +89,19 @@ void HashTablePrint(HashTable* table) {
             printf(
                 "Index:%d, Key:%s, Value:%s\n", 
                 i, 
-                table->items[i] -> key, 
+                table->items[i]->key, 
                 table->items[i]->value
             );
+            LinkedList* temp = table->overflowBuckets[i];
+            while (temp) {
+                printf(
+                    "Index:%d, Key:%s, Value:%s\n", 
+                    i, 
+                    temp->item->key, 
+                    temp->item->value
+                );
+                temp = temp->next;
+            }
         }
     }
     printf("-------------------\n\n");
