@@ -102,10 +102,27 @@ void HashTablePrint(HashTable* table) {
     printf("-------------------\n\n");
 }
 
+char* HashTableSearch(HashTable* table, char* key) {
+    int index = HashFunction(key);
+    HashItem* item = table->items[index];
+    if (item != NULL) {
+        if (strcmp(item->key, key) == 0) {
+            printf("{\"%s\": \"%s\"}\n", key, item->value);
+            return item->value;
+        }
+    }
+    printf("Key does not exist: %s\n", key);
+    return NULL;
+}
+
 int main() {
     HashTable* hashTable = HashTableCreate(CAPACITY);
     HashTableInsert(hashTable, "Test", "1");
-    HashTableInsert(hashTable, "cool", "2");
+    HashTableInsert(hashTable, "!!", "2");
+    HashTableInsert(hashTable, "B", "3");
+    HashTableSearch(hashTable, "Test");
+    HashTableSearch(hashTable, "!!");
+    HashTableSearch(hashTable, "B");
     HashTablePrint(hashTable);
     return 0;
 }
